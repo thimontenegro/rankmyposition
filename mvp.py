@@ -228,7 +228,7 @@ def fix_category(my_categorie, other_categories,df):
 ##Entrada de dados
 
 with st.beta_container():
-    st.sidebar.image('/home/thiago/mvp_rank/rankmyapp/images/logo_horizontal_branca_png.png',use_column_width=True)
+    st.sidebar.image('images/logo_horizontal_branca_png.png',use_column_width=True)
 
     ativos = st.sidebar.number_input("Por Favor, informe o número de usuários ativos:", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     ativos = int(ativos)
