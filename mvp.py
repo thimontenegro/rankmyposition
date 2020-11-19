@@ -408,5 +408,4 @@ elif ais == "Scale":
   except ValueError:
     pass
 st.markdown("<h4>" + "A posição na Categoria do seu App estará entre <strong>" + str(lower_bound) +" </strong> à " + "<strong>" +  str(upper_bound)+"</strong>" + "</h4>", unsafe_allow_html=True)
-st.markdown(unsafe_allow_html=True)
 st.markdown("<a href = https://forms.gle/6zSukezWNSrJGfYo7"> + str(Feedback) + "</a>",unsafe_allow_html=True )
