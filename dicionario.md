@@ -37,16 +37,3 @@ O que acontece debaixo dos panos:
 
 * total: É o somátorio de todas as avaliações de 1 à 5 estrelas.
 
-* Conversão: Taxa de Conversão por canal de Aquisição, Instalação por Canal / Visualização
-
-* oneStarProp: Proporção de uma estrela que o aplicativo recebeu, oneStar / total
-
-* twoStarProp: Proporção do total de duas estrelas dividido pelo total acumulado de avaliações;
-
-* threeStarProp: Proporção do total de três estrelas dividido pelo total acumulado de avaliações;
-
-* fourStarProp: Proporção do total de quatro estrelas dividido pelo total acumulado de avaliações;
-
-* fiveStarProp: Proporção do total de cinco estrelas dividido pelo total acumulado de avaliações;
-
-

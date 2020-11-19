@@ -17,7 +17,7 @@ st.markdown("<h1 style='text-align: center; color: #1088ff;'>RankMyPosition</h1>
 st.markdown("Esta aplicação tem como objetivo prever a posição da categoria de acordo com a categoria do AIS" +
 "\n com base na entrada dos dados. Vale destacar que este é um MVP e que sugestões e melhorias são válidas!")
 st.markdown("---")
-info = st.checkbox("ℹ️ ** Informações Úteis **")
+info = st.checkbox("ℹ️ Informações Úteis ")
 dict_check = st.checkbox("📕 Dicionário de Dados")
 dict_markdown = read_markdown_file("dicionario.md")
 info_markdown = read_markdown_file("info.md")
@@ -232,11 +232,11 @@ with st.beta_container():
 
     ativos = st.sidebar.number_input("Por Favor, informe o número de Usuários Ativos (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     ativos = int(ativos)
-    anr = st.sidebar.number_input("Número de ANRs (no dia da abservação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
+    anr = st.sidebar.number_input("Número de ANRs (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     anr = int(anr)
-    falhas = st.sidebar.number_input("Número de Falhas",min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
+    falhas = st.sidebar.number_input("Número de Falhas (no dia da observação)",min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     falhas = int(falhas)
-    installs = st.sidebar.number_input("Número de Instalações", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    installs = st.sidebar.number_input("Número de Instalações (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     installs = int(installs)
     fiveStars = st.sidebar.number_input("Total acumulado de 5 estrelas (no dia da observação)",min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     fiveStars = int(fiveStars)
@@ -249,7 +249,7 @@ with st.beta_container():
     oneStar = st.sidebar.number_input("Total acumulado de 1 estrela (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     total = (fiveStars + fourStars + threeStars + twoStars + oneStar)
     oneStar = int(oneStar)
-    score = st.sidebar.number_input("Score, a métrica utilizada na Tool.",min_value = 0.0, max_value = 5.0, format = "%.3f")
+    score = st.sidebar.number_input("Score, a métrica utilizada na Tool (no dia da observação).",min_value = 0.0, max_value = 5.0, format = "%.3f")
     score = float(score)
     print(score)
     aquisicao = st.sidebar.number_input("Número de Aquisição de Usuários (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
@@ -288,6 +288,9 @@ strong {
   color: #1088ff
 }
 h4 {
+  text-align: center;
+}
+#feedback {
   text-align: center;
 }
 </style>
@@ -408,4 +411,8 @@ elif ais == "Scale":
   except ValueError:
     pass
 st.markdown("<h4>" + "A posição na Categoria do seu App estará entre <strong>" + str(lower_bound) +" </strong> à " + "<strong>" +  str(upper_bound)+"</strong>" + "</h4>", unsafe_allow_html=True)
-st.markdown("<a href = https://forms.gle/6zSukezWNSrJGfYo7"> + str(Feedback) + "</a>",unsafe_allow_html=True )
+st.markdown("<span> </span>", unsafe_allow_html=True)
+st.markdown("<span> </span>", unsafe_allow_html=True)
+st.markdown("<span> </span>", unsafe_allow_html=True)
+st.markdown("<span> </span>", unsafe_allow_html=True)
+st.markdown('<h4> Possui alguma sugestão ou melhoria para o RankMyPosition?  <a href = "https://forms.gle/6zSukezWNSrJGfYo7" id = "feedback">' + str("Clique Aqui.") + "</a> </h4>",unsafe_allow_html=True )
