@@ -230,15 +230,15 @@ def fix_category(my_categorie, other_categories,df):
 with st.beta_container():
     st.sidebar.image('images/logo_horizontal_branca_png.png',use_column_width=True)
 
-    ativos = st.sidebar.number_input("Por Favor, informe o número de usuários ativos:", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
+    ativos = st.sidebar.number_input("Por Favor, informe o número de Usuários Ativos (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     ativos = int(ativos)
-    anr = st.sidebar.number_input("Número de ANRs", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
+    anr = st.sidebar.number_input("Número de ANRs (no dia da abservação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     anr = int(anr)
     falhas = st.sidebar.number_input("Número de Falhas",min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     falhas = int(falhas)
     installs = st.sidebar.number_input("Número de Instalações", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     installs = int(installs)
-    fiveStars = st.sidebar.number_input("Total acumulado de 5 estrelas (no dia de observação",min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    fiveStars = st.sidebar.number_input("Total acumulado de 5 estrelas (no dia da observação)",min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     fiveStars = int(fiveStars)
     fourStars = st.sidebar.number_input('Total acumulado de 4 estrelas (no dia da observação)', min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     fourStars = int(fourStars)
@@ -246,18 +246,18 @@ with st.beta_container():
     threeStars = int(threeStars)
     twoStars = st.sidebar.number_input("Total acumulado de 2 estrelas (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     twoStars = int(twoStars)
-    oneStar = st.sidebar.number_input("Total acumulado de 1 estrela (no dia de observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    oneStar = st.sidebar.number_input("Total acumulado de 1 estrela (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     total = (fiveStars + fourStars + threeStars + twoStars + oneStar)
     oneStar = int(oneStar)
     score = st.sidebar.number_input("Score, a métrica utilizada na Tool.",min_value = 0.0, max_value = 5.0, format = "%.3f")
     score = float(score)
     print(score)
-    aquisicao = st.sidebar.number_input("Número de Aquisição de Usuários (do dia)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    aquisicao = st.sidebar.number_input("Número de Aquisição de Usuários (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     aquisicao = int(aquisicao)
-    nota = st.sidebar.number_input('Nota média do aplicativo (do dia)')
+    nota = st.sidebar.number_input('Nota média do aplicativo (no dia da observação)')
     nota = float(nota)
     print(nota)
-    desinstalacoes = st.sidebar.number_input("Número de Perdas (desinstalações do dia)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
+    desinstalacoes = st.sidebar.number_input("Número de Perdas (desinstalações do dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     desinstalacoes = int(desinstalacoes)
 
 st.markdown(
@@ -408,3 +408,5 @@ elif ais == "Scale":
   except ValueError:
     pass
 st.markdown("<h4>" + "A posição na Categoria do seu App estará entre <strong>" + str(lower_bound) +" </strong> à " + "<strong>" +  str(upper_bound)+"</strong>" + "</h4>", unsafe_allow_html=True)
+st.markdown(unsafe_allow_html=True)
+st.markdown("<a href = https://forms.gle/6zSukezWNSrJGfYo7"> + str(Feedback) + "</a>",unsafe_allow_html=True )
