@@ -372,7 +372,7 @@ def dealing_with_scale_regressor(df):
   'Category_FINANCE','Category_FOODS_AND_DRINK','Category_MAPS_AND_NAVIGATION',	'Category_SHOPPING']
   _df = df[columns]
   #x_file = open(os.path.join("modelos/", "model_scale.pkl"), "rb")
-  regressor = load_model("/home/thiago/mvp_rank/rankmyapp/modelos/model_scale")
+  regressor = load_model("modelos/model_scale")
   predictions = predict_model(regressor,_df)
   return predictions['Label'].iloc[0].astype(int)
 mae = 0
