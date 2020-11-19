@@ -410,7 +410,12 @@ elif ais == "Scale":
     upper_bound = predicted + mae
   except ValueError:
     pass
-st.markdown("<h4>" + "A posição na Categoria do seu App estará entre <strong>" + str(lower_bound) +" </strong> à " + "<strong>" +  str(upper_bound)+"</strong>" + "</h4>", unsafe_allow_html=True)
+
+if (ativos == 0 and anr == 0 and falhas == 0 and installs == 0 and fiveStars == 0 and fourStars == 0 and threeStars == 0 and twoStars == 0 
+    and total == 0 and oneStar == 0 and score == 0.00 and aquisicao == 0 and nota == 0.00 and desinstalacoes ==0):
+        st.markdown("<h4>" + "A posição na Categoria do seu App será <strong>" +  str(0)+"</strong>" + "</h4>", unsafe_allow_html=True)
+else:
+  st.markdown("<h4>" + "A posição na Categoria do seu App estará entre <strong>" + str(lower_bound) +" </strong> à " + "<strong>" +  str(upper_bound)+"</strong>" + "</h4>", unsafe_allow_html=True)
 st.markdown("<span> </span>", unsafe_allow_html=True)
 st.markdown("<span> </span>", unsafe_allow_html=True)
 st.markdown("<span> </span>", unsafe_allow_html=True)
