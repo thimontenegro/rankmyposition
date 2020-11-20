@@ -264,20 +264,20 @@ st.markdown(
     """
 <style>
 .reportview-container .markdown-text-container {
-    font-family: Ubuntu;
+    font-family: "Ubuntu";
 }
 .sidebar .sidebar-content {
     background-image: linear-gradient(#1088ff,#0bd6d4);
     color: white;
-    font-family: Ubuntu
+    font-family: "Ubuntu";
 }
 .Widget>label {
     
-    font-family: Ubuntu;
+    font-family: "Ubuntu";
 }
 [class^="st-b"]  {
     
-    font-family:Ubuntu;
+    font-family:"Ubuntu";
 }
 
 
