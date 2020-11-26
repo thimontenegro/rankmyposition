@@ -17,3 +17,5 @@ Para os aplicativos Appear, podemos ter uma variação de cerca de 15 posições
 Para aplicativos Improve, essa variação é de em torno 5 posições, tanto para mais quanto para menos.
 
 Para aplicativos Scale, essa variação é de cerca 2 posições.
+
+

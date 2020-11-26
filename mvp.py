@@ -5,6 +5,7 @@ import pandas as pd
 import pickle
 import os
 import math
+import pycaret
 from pycaret.regression import load_model
 from pycaret.regression import *
 from pathlib import Path
@@ -229,7 +230,6 @@ def fix_category(my_categorie, other_categories,df):
 
 with st.beta_container():
     st.sidebar.image('images/logo_horizontal_branca_png.png',use_column_width=True)
-
     ativos = st.sidebar.number_input("Por Favor, informe o número de Usuários Ativos (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     ativos = int(ativos)
     anr = st.sidebar.number_input("Número de ANRs (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
@@ -238,18 +238,18 @@ with st.beta_container():
     falhas = int(falhas)
     installs = st.sidebar.number_input("Número de Instalações (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     installs = int(installs)
-    fiveStars = st.sidebar.number_input("Total acumulado de 5 estrelas (no dia da observação)",min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    fiveStars = st.sidebar.number_input("Total acumulado de 5 estrelas, métrica retirada na Tool em Rating Analysis (no dia da observação)",min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     fiveStars = int(fiveStars)
-    fourStars = st.sidebar.number_input('Total acumulado de 4 estrelas (no dia da observação)', min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
+    fourStars = st.sidebar.number_input('Total acumulado de 4 estrelas, métrica retirada na Tool em Rating Analysis (no dia da observação)', min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
     fourStars = int(fourStars)
-    threeStars = st.sidebar.number_input("Total acumulado de 3 estrelas (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    threeStars = st.sidebar.number_input("Total acumulado de 3 estrelas, métrica retirada na Tool em Rating Analysis (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     threeStars = int(threeStars)
-    twoStars = st.sidebar.number_input("Total acumulado de 2 estrelas (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    twoStars = st.sidebar.number_input("Total acumulado de 2 estrelas, métrica retirada na Tool em Rating Analysis (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     twoStars = int(twoStars)
-    oneStar = st.sidebar.number_input("Total acumulado de 1 estrela (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
+    oneStar = st.sidebar.number_input("Total acumulado de 1 estrela, métrica retirada na Tool em Rating Analysis (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
     total = (fiveStars + fourStars + threeStars + twoStars + oneStar)
     oneStar = int(oneStar)
-    score = st.sidebar.number_input("Score, a métrica utilizada na Tool (no dia da observação).",min_value = 0.0, max_value = 5.0, format = "%.3f")
+    score = st.sidebar.number_input("Average Rating,  métrica retirada na Tool em Rating Analysis (no dia da observação).",min_value = 0.0, max_value = 5.0, format = "%.3f")
     score = float(score)
     print(score)
     aquisicao = st.sidebar.number_input("Número de Aquisição de Usuários (no dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f",  step = 1.0)
@@ -257,8 +257,8 @@ with st.beta_container():
     nota = st.sidebar.number_input('Nota média do aplicativo (no dia da observação)')
     nota = float(nota)
     print(nota)
-    desinstalacoes = st.sidebar.number_input("Número de Perdas (desinstalações do dia da observação)", min_value=0.0, max_value=99999999999999.9, format="%1f", step = 1.0)
-    desinstalacoes = int(desinstalacoes)
+    desinstalacoes =0
+    #desinstalacoes = int(desinstalacoes)
 
 st.markdown(
     """
@@ -279,8 +279,6 @@ st.markdown(
     
     font-family:"Ubuntu";
 }
-
-
 header .decoration {
     background-image: none;
 }
@@ -340,17 +338,17 @@ def dealing_with_appear_regressor(df):
   
   columns = ['Ativos', 'ANR', 'Falhas', 'Instalações', 'fiveStars', 'fourStars',
        'threeStars', 'twoStars', 'oneStar', 'total', 'score',
-       'Aquisição de Usuários', 'Nota Média', 'Desinstalações', 'Category_AUTO_AND_VEHICLES', 'Category_BUSINESS',
+       'Aquisição de Usuários', 'Nota Média', 'Category_AUTO_AND_VEHICLES', 'Category_BUSINESS',
        'Category_FINANCE', 'Category_HEALTH_AND_FITNESS', 'Category_LIFESTYLE',
        'Category_SHOPPING', 'Category_SPORTS']
   _df = df[columns]
-  #total = _df["total"]
-  #_df['oneStarProp'] = round(_df['oneStar']/ total, 2)
-  #_df['twoStarsProp'] = round(_df['twoStars'] / total, 2)
-  #_df['threeStarsProp'] = round(_df['threeStars'] / total, 2)
-  #_df['fourStarsProp'] = round(_df['fourStars'] / total, 2)
-  #_df['fiveStarsProp'] = round(_df['fiveStars'] / total , 2)
-  x_file = open(os.path.join("modelos/", "model_appear.pkl"), "rb")
+  total = _df["total"]
+  _df['oneStarProp'] = round(_df['oneStar']/ total, 2)
+  _df['twoStarsProp'] = round(_df['twoStars'] / total, 2)
+  _df['threeStarsProp'] = round(_df['threeStars'] / total, 2)
+  _df['fourStarsProp'] = round(_df['fourStars'] / total, 2)
+  _df['fiveStarsProp'] = round(_df['fiveStars'] / total , 2)
+  x_file = open(os.path.join("modelos/", "model_appear_new.pkl"), "rb")
   regressor = pickle.load(x_file)
   x_file.close()
   predictions = regressor.predict(_df)
@@ -359,23 +357,24 @@ def dealing_with_appear_regressor(df):
 def dealing_with_improve_regressor(df):
   columns = ['Ativos', 'ANR', 'Falhas', 'Instalações', 'fiveStars', 'fourStars',
        'threeStars', 'twoStars', 'oneStar', 'total', 'score',
-       'Aquisição de Usuários', 'Nota Média', 'Desinstalações','Category_EVENTS', 'Category_FINANCE',
+       'Aquisição de Usuários', 'Nota Média','Desinstalações','Category_EVENTS', 'Category_FINANCE',
        'Category_LIFESTYLE', 'Category_MAPS_AND_NAVIGATION','Category_SHOPPING', 'Category_TRAVEL_AND_LOCAL']
   _df = df[columns]
-  x_file = open(os.path.join("modelos/", "model_improve.pkl"), "rb")
+  x_file = open(os.path.join("", "model_improve_new.pkl"), "rb")
   regressor = pickle.load(x_file)
   x_file.close()
   predictions = regressor.predict(_df)
+  print(predictions[0])
   return round(predictions[0])
 
 def dealing_with_scale_regressor(df):
   columns = ['Ativos', 'ANR', 'Falhas', 'Instalações', 'fiveStars', 'fourStars',
        'threeStars', 'twoStars', 'oneStar', 'total', 'score',
-       'Aquisição de Usuários', 'Nota Média', 'Desinstalações',
+       'Aquisição de Usuários', 'Nota Média',
   'Category_FINANCE','Category_FOODS_AND_DRINK','Category_MAPS_AND_NAVIGATION',	'Category_SHOPPING']
   _df = df[columns]
   #x_file = open(os.path.join("modelos/", "model_scale.pkl"), "rb")
-  regressor = load_model("modelos/model_scale")
+  regressor = load_model("modelos/model_scale_sem_desinstalacoes")
   predictions = predict_model(regressor,_df)
   return predictions['Label'].iloc[0].astype(int)
 mae = 0
@@ -415,7 +414,8 @@ if (ativos == 0 and anr == 0 and falhas == 0 and installs == 0 and fiveStars == 
     and total == 0 and oneStar == 0 and score == 0.00 and aquisicao == 0 and nota == 0.00 and desinstalacoes ==0):
         st.markdown("<h4>" + "A posição na Categoria do seu App será <strong>" +  str(0)+"</strong>" + "</h4>", unsafe_allow_html=True)
 else:
-  st.markdown("<h4>" + "A posição na Categoria do seu App estará entre <strong>" + str(lower_bound) +" </strong> à " + "<strong>" +  str(upper_bound)+"</strong>" + "</h4>", unsafe_allow_html=True)
+  st.markdown("<h4>" + "A posição na Categoria do seu App estará entre <strong>" + str(int(lower_bound)) +" </strong> à " + "<strong>" +  str(int(upper_bound))+"</strong>" + "</h4>", unsafe_allow_html=True)
+
 st.markdown("<span> </span>", unsafe_allow_html=True)
 st.markdown("<span> </span>", unsafe_allow_html=True)
 st.markdown("<span> </span>", unsafe_allow_html=True)
