@@ -297,7 +297,7 @@ h4 {
 )
 
 ### Escolha das Categorias
-category_string = "Informe a Categoria do seu App"
+category_string = "Informe a Fase do AIS do seu App"
 ais = st.selectbox(category_string,("Appear",'Improve','Scale'))
 if ais == 'Appear':
     other_categories = ["AUTO_AND_VEHICLES","BUSINESS",
